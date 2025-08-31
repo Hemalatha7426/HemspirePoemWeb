@@ -1,47 +1,63 @@
 const express = require("express");
-const fs = require("fs");
 const path = require("path");
 const cors = require("cors");
+const bodyParser = require("body-parser");
+require("dotenv").config();
+const fetch = require("node-fetch");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
+
+// JSONBin configuration
+const BIN_ID = process.env.JSONBIN_BIN_ID;
+const API_KEY = process.env.JSONBIN_API_KEY;
 
 // Middleware
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-// ✅ Serve static files (HTML, CSS, JS, images) from project root
+// Serve static frontend files
 app.use(express.static(path.join(__dirname, "..")));
 
-// Save message API
-app.post("/contact", (req, res) => {
-  const { name, email, msg } = req.body;
+// API route to handle contact form
+app.post("/api/contact", async (req, res) => {
+  const newMessage = { ...req.body, time: new Date().toLocaleString() };
 
-  const filePath = path.join(__dirname, "messages.json");
-  let messages = [];
+  try {
+    // Fetch current messages from JSONBin
+    const response = await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}/latest`, {
+      headers: { "X-Master-Key": API_KEY }
+    });
 
-  if (fs.existsSync(filePath)) {
-    try {
-      messages = JSON.parse(fs.readFileSync(filePath));
-    } catch (err) {
-      console.error("Error reading messages.json:", err);
-    }
+    const data = await response.json();
+    let messages = data.record.messages || [];
+
+    // Add new message
+    messages.push(newMessage);
+
+    // Update JSONBin
+    await fetch(`https://api.jsonbin.io/v3/b/${BIN_ID}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Master-Key": API_KEY
+      },
+      body: JSON.stringify({ messages })
+    });
+
+    res.json({ success: true, message: "Message saved successfully!" });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, message: "Failed to save message." });
   }
-
-  messages.push({ name, email, msg, time: new Date().toLocaleString() });
-
-  fs.writeFileSync(filePath, JSON.stringify(messages, null, 2));
-
-  res.json({ success: true, message: "Message saved in messages.json!" });
 });
 
-// ✅ Default route for homepage
-app.get("/", (req, res) => {
+// Fallback route for frontend pages
+app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "index.html"));
 });
 
 // Start server
-app.listen(PORT, () =>
-  console.log(`✅ Server running at http://localhost:${PORT}`)
-);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
