@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hemspire Poems</title>
+  <link rel="stylesheet" href="style.css"/>
+  <link rel="preload" href="poems.json" as="fetch" crossorigin="anonymous">
+</head>
+<body>
+  <!-- Floating Petals (added via JS) -->
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="logo-title">
+      <img src="assets/images/logo.png" alt="Hemspire Logo" class="logo"/>
+      <h1 class="brand-title">🌸 Hemspire Poems</h1>
+    </div>
+    <nav class="nav-links">
+      <a href="index.html" class="active">Home</a>
+      <a href="pages/gallery.html">Gallery</a>
+      <a href="pages/about.html">About</a>
+      <a href="pages/contact.html">Contact</a>
+      <button id="themeToggle" class="btn-pill">🌙 Dark Mode</button>
+    </nav>
+    <div class="hamburger" id="hamburger">
+  ☰
+</div>
+  </header>
+
+  <!-- Carousel Banner -->
+  <section class="carousel section-py">
+    <div class="carousel-container reveal" id="carouselContainer" aria-live="polite"></div>
+    <button class="carousel-prev" aria-label="Previous slide" onclick="prevSlide()">&#10094;</button>
+    <button class="carousel-next" aria-label="Next slide" onclick="nextSlide()">&#10095;</button>
+    <div class="carousel-dots" id="carouselDots" aria-label="Carousel pagination"></div>
+  </section>
+
+  <!-- Quote of the Day -->
+  <section class="quote-box reveal">
+    <h2>Quote of the Day</h2>
+    <p id="quote">Loading...</p>
+  </section>
+
+  <!-- Search Bar for Preview Poems -->
+  <section class="search-bar reveal">
+    <input type="text" id="homeSearch" placeholder="Search Featured Poems..." onkeyup="searchHomePoems()" aria-label="Search poems">
+  </section>
+
+  <!-- Preview Poems -->
+  <section class="gallery">
+    <div class="section-header">
+      <h2 class="reveal">Featured Poems</h2>
+      <a class="btn-link reveal" href="pages/gallery.html">View all →</a>
+    </div>
+    <div id="poemGrid" class="poem-grid reveal"></div>
+  </section>
+
+  <!-- Popup Modal -->
+  <div id="popup" class="popup hidden" role="dialog" aria-modal="true" aria-labelledby="popupText">
+    <div class="popup-content">
+      <span class="close-btn" role="button" tabindex="0" onclick="closePopup()" onkeypress="if(event.key==='Enter'){closePopup()}">&times;</span>
+      <img id="popupImage" src="" alt="Poem" />
+      <p id="popupText"></p>
+      <div class="popup-actions">
+        <button class="btn" id="popupShareBtn">📤 Share</button>
+        <a class="btn" id="popupDownloadBtn" download="poem.jpg">⬇️ Download</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Hemspire. All rights reserved.</p>
+  </footer>
+
+  <script src="script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact - Hemspire Poems</title>
+  <link rel="stylesheet" href="../style.css"/>
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="logo-title">
+      <img src="../assets/images/logo.png" alt="Hemspire Logo" class="logo"/>
+      <h1 class="brand-title">Contact Hemspire</h1>
+    </div>
+    <nav class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="about.html">About</a>
+      <a href="contact.html" class="active">Contact</a>
+      <button id="themeToggle" class="btn-pill">🌙 Dark Mode</button>
+    </nav>
+     <div class="hamburger" id="hamburger">
+  ☰
+</div>
+  </header>
+
+  <!-- Contact Section -->
+  <section class="contact-page section-py">
+<form id="contactForm" class="contact-form reveal"  novalidate>
+      <h2>Get in Touch</h2>
+      <label for="name">Your Name</label>
+      <input id="name" name="name" type="text" placeholder="Jane Doe" required/>
+
+      <label for="email">Your Email</label>
+      <input id="email" name="email" type="email" placeholder="jane@example.com" required/>
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" placeholder="Write your message..." required></textarea>
+
+      <button type="submit" class="btn">Send Message</button>
+      <p id="formMessage" class="form-message" aria-live="polite"></p>
+    </form>
+
+    <div class="contact-image reveal">
+      <img src="../assets/images/contact-image.png" alt="Contact Hemspire"/>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Hemspire. All rights reserved.</p>
+  </footer>
+
+  <script src="../script.js" defer></script>
+</body>
+</html>

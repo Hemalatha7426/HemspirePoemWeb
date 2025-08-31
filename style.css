@@ -1,0 +1,268 @@
+/* -------------------------------
+   Root / Theme
+---------------------------------*/
+:root{
+  --bg: #fdf6f0;
+  --text: #333;
+  --card: #ffffff;
+  --brand: #ff6b8b;
+  --brand-2: #ffb6c7;
+  --shadow: 0 10px 25px rgba(0,0,0,0.08);
+  --border: rgba(0,0,0,0.08);
+  --muted: #666;
+}
+*{ box-sizing: border-box; }
+html,body{ margin:0; padding:0; }
+body{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+body.dark-mode{
+  --bg: #121212;
+  --text: #f5f5f5;
+  --card: #1e1e1e;
+  --brand: #ff8fb0;
+  --brand-2: #ffc1d0;
+  --shadow: 0 10px 25px rgba(0,0,0,0.25);
+  --border: rgba(255,255,255,0.08);
+  --muted: #c7c7c7;
+}
+/* Default desktop */
+.hamburger {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background: #222;
+    position: absolute;
+    top: 60px;
+    right: 10px;
+    width: 200px;
+    border-radius: 10px;
+    padding: 10px;
+  }
+
+  .nav-links.show {
+    display: flex;
+  }
+
+  .hamburger {
+    display: block;
+  }
+}
+
+/* Utilities */
+.section-py{ padding: 40px 20px; }
+.btn{ background: var(--brand); color:#fff; border:none; padding:10px 16px; border-radius:12px; cursor:pointer; box-shadow: var(--shadow); transition: transform .2s ease, opacity .2s ease; }
+.btn:hover{ transform: translateY(-2px); opacity: .95; }
+.btn-pill{ background: var(--brand-2); color:#222; padding:8px 14px; border-radius: 999px; border: none; cursor:pointer; }
+.btn-link{ color: var(--brand); font-weight: 600; text-decoration: none; }
+
+/* -------------------------------
+   Header / Navbar
+---------------------------------*/
+.site-header{
+  position: sticky; top:0; z-index: 50;
+  display:flex; justify-content: space-between; align-items:center;
+  padding: 10px 20px; background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(10px); border-bottom: 1px solid var(--border);
+}
+body.dark-mode .site-header{ background: rgba(0,0,0,0.5); }
+.logo-title{ display:flex; align-items:center; gap:10px; }
+.logo{ width:48px; height:50px; border-radius: 12px; object-fit: cover; }
+.brand-title{ font-weight: 800; letter-spacing: .5px; }
+
+.nav-links{ display:flex; align-items:center; gap: 14px; }
+.nav-links a{ text-decoration:none; color: var(--text); font-weight:600; opacity: .8; }
+.nav-links a.active, .nav-links a:hover{ color: var(--brand); opacity: 1; }
+
+/* Mobile menu toggle */
+.menu-toggle{ display:none; cursor:pointer; font-size:24px; background:none; border:none; color: var(--text); }
+
+/* -------------------------------
+   Carousel
+---------------------------------*/
+.carousel{ position: relative; max-width: 1500px; margin: 0 auto; }
+.carousel-container{
+  position: relative; width:100%; height: clamp(320px, 55vw, 540px);
+  border-radius: 18px; overflow: hidden; box-shadow: var(--shadow); background: var(--card);
+}
+.carousel-slide{
+  position: absolute; inset:0; opacity:0; pointer-events: none;
+  display: grid; place-items: center;
+  transition: opacity .6s ease;
+}
+.carousel-slide.active{ opacity:1; pointer-events: auto; }
+.carousel-image{ width:100%; height:100%; object-fit: cover; display:block; }
+.carousel-caption{
+  position:absolute; left:20px; bottom:20px; right:20px;
+  background: linear-gradient( to right, rgba(0,0,0,.65), rgba(0,0,0,.2) );
+  color:#fff; padding:12px 14px; border-radius:12px; font-size: clamp(14px, 2.2vw, 18px);
+  animation: slideUp .6s ease both;
+}
+.carousel-prev,.carousel-next{
+  position:absolute; top:50%; transform: translateY(-50%);
+  border:none; width:42px; height:42px; border-radius:50%;
+  background: rgba(255,255,255,.85); cursor:pointer; font-size: 22px; line-height: 42px;
+  box-shadow: var(--shadow);
+}
+.carousel-prev:hover,.carousel-next:hover{ background:#fff; }
+.carousel-prev{ left:14px; } .carousel-next{ right:14px; }
+.carousel-dots{
+  position:absolute; left:0; right:0; bottom:12px; display:flex; gap:8px; justify-content:center; align-items:center;
+}
+.carousel-dots button{
+  width:9px; height:9px; border-radius:999px; border:none; background: rgba(255,255,255,.6); cursor:pointer;
+}
+.carousel-dots button.active{ background:#fff; transform: scale(1.2); }
+
+/* -------------------------------
+   Quote Box
+---------------------------------*/
+.quote-box{
+  max-width: 900px; margin: 26px auto; background: var(--card); border:1px solid var(--border);
+  border-left: 5px solid var(--brand); padding: 16px 18px; border-radius: 14px; box-shadow: var(--shadow);
+}
+.quote-box h2{ margin: 0 0 6px 0; }
+
+/* -------------------------------
+   Search Bar
+---------------------------------*/
+.search-bar{ text-align:center; }
+.search-bar input{
+  width:min(560px, 90%); padding:12px 16px; border-radius: 999px; border:1px solid var(--border);
+  background: var(--card); color: var(--text); box-shadow: var(--shadow); outline:none;
+}
+
+/* -------------------------------
+   Section header
+---------------------------------*/
+.section-header{
+  max-width: 1200px; margin: 0 auto 8px auto; padding: 0 16px;
+  display:flex; align-items: baseline; justify-content: space-between;
+}
+
+/* -------------------------------
+   Poem Grid
+---------------------------------*/
+.poem-grid{
+  max-width: 1200px; margin: 14px auto; padding: 0 16px;
+  display:grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap:18px;
+}
+.poem-card{
+  background: var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; box-shadow: var(--shadow);
+  transform: translateY(0); transition: transform .25s ease, box-shadow .25s ease;
+}
+.poem-card:hover{ transform: translateY(-4px); box-shadow: 0 16px 32px rgba(0,0,0,.12); }
+.poem-card img{ width:100%; height:210px; object-fit: cover; display:block; cursor:pointer; }
+.poem-text{ padding: 10px 12px; font-size: 14px; color: var(--text); }
+.actions{
+  display:flex; gap:8px; padding: 10px 12px; border-top:1px solid var(--border); align-items:center; justify-content: space-between;
+}
+.actions button{ background:transparent; border:none; cursor:pointer; font-size: 15px; color: var(--text); }
+.actions button.liked{ color:#ff4b5c; }
+
+/* -------------------------------
+   Popup
+---------------------------------*/
+.popup{
+  position: fixed; inset:0; background: rgba(0,0,0,.65);
+  display:flex; align-items:center; justify-content:center; z-index: 100;
+}
+.popup.hidden{ display:none; }
+.popup-content{
+  background: var(--card); border:1px solid var(--border); border-radius:16px; max-width: min(920px, 92vw); max-height: 90vh;
+  overflow:auto; padding:16px; position:relative; box-shadow: var(--shadow); animation: fadeIn .35s ease both;
+}
+.popup-content img{ width:100%; border-radius:12px; margin-bottom: 10px; }
+.close-btn{
+  position:absolute; top:12px; right:14px; font-size:28px; font-weight: 700; color: var(--text); cursor:pointer;
+}
+.popup-actions{ display:flex; gap:8px; }
+
+/* -------------------------------
+   About & Contact
+---------------------------------*/
+.about-page, .contact-page{
+  display:flex; flex-wrap:wrap; gap: 32px; justify-content:center; align-items:center; max-width: 1200px; margin: 0 auto;
+}
+.about-content{ flex:1 1 380px; max-width: 640px; }
+.about-content h2{ color: var(--brand); margin-top:0; }
+.about-image img{ width:min(520px, 92vw); border-radius:18px; box-shadow: var(--shadow); }
+.contact-form{ flex: 1 1 380px; max-width:540px; background: var(--card); border:1px solid var(--border); padding:18px; border-radius: 16px; box-shadow: var(--shadow); }
+.contact-form h2{ margin:0 0 10px 0; color: var(--brand); }
+.contact-form label{ display:block; margin: 10px 0 6px 0; font-weight:600; }
+.contact-form input, .contact-form textarea{
+  width:100%; padding:12px; border-radius:12px; border:1px solid var(--border); background:transparent; color: var(--text); outline:none;
+}
+.contact-form button{ margin-top:12px; }
+.form-message{ margin-top:10px; font-size: 14px; color: var(--muted); }
+.contact-image img{ width:min(520px, 92vw); border-radius:18px; box-shadow: var(--shadow); }
+
+
+/* -------------------------------
+   Footer
+---------------------------------*/
+footer{ text-align:center; padding:18px; border-top:1px solid var(--border); background: rgba(0,0,0,0.02); }
+
+/* -------------------------------
+   Reveal on scroll
+---------------------------------*/
+.reveal{ opacity:0; transform: translateY(14px); }
+.reveal.revealed{ opacity:1; transform: none; transition: opacity .6s ease, transform .6s ease; }
+
+/* -------------------------------
+   Petals (ambient effect)
+---------------------------------*/
+.petal{
+  position: fixed; top: -10vh; pointer-events: none; width: 12px; height: 12px; background: radial-gradient(circle at 30% 30%, #fff 0 25%, var(--brand) 26% 100%);
+  border-radius: 60% 40% 60% 40%; opacity:.75; filter: blur(.2px); z-index: 0;
+  animation: fall linear forwards;
+}
+@keyframes fall{
+  0%{ transform: translateY(-10vh) translateX(0) rotate(0deg); opacity:.0; }
+  10%{ opacity:.75; }
+  100%{ transform: translateY(110vh) translateX(var(--dx)) rotate(360deg); opacity: 0; }
+}
+
+/* -------------------------------
+   Animations
+---------------------------------*/
+@keyframes slideUp{ from{ transform: translateY(14px); opacity:0; } to{ transform:none; opacity:1; } }
+@keyframes fadeIn{ from{ opacity:0; } to{ opacity:1; } }
+
+/* -------------------------------
+   Responsive
+---------------------------------*/
+@media (max-width: 1024px){
+  .section-header{ flex-direction: column; gap:10px; align-items:flex-start; }
+}
+@media (max-width: 768px){
+  .menu-toggle{ display:block; }
+  .nav-links{ display:none; flex-direction:column; align-items:flex-start; width:100%; background: var(--card); padding:12px; border-radius:12px; margin-top:8px; }
+  .nav-links.show{ display:flex; }
+  .carousel-prev,.carousel-next{ display:none; }
+  .poem-card img{ height:180px; }
+}
+@media (max-width: 480px){
+  .logo{ width:38px; height:38px; }
+  .brand-title{ font-size: 16px; }
+  .poem-card img{ height:160px; }
+  .carousel-caption{ font-size:14px; padding:8px 10px; }
+  .contact-form, .about-content{ flex:1 1 100%; }
+}
+
+
+
+
+

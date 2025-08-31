@@ -1,0 +1,29 @@
+{
+  "carousel": [
+    { "id": "c1", "image": "/HemspirePoems/assets/carousel/carousal1.jpg", "text": "The flowers bloom, the heart smiles; in little words, the soul travels miles." },
+    { "id": "c2", "image": "/HemspirePoems/assets/carousel/carousal2.jpg", "text": "Even in silence, words take flight— a poet’s soul shines in the night." },
+    { "id": "c3", "image": "/HemspirePoems/assets/carousel/carousal3.jpg", "text": "Dreams drift softly on silver streams; verses wake the sleeping dreams." },
+    { "id": "c4", "image": "/HemspirePoems/assets/carousel/carousal4.jpg", "text": "Between the lines, a gentle light; hope is ink that never dries." }
+  ],
+  "gallery": [
+    { "id": "g1", "image": "/HemspirePoems/assets/gallery/Acting poem.jpg", "text": "Where Acting Begins, Trust Breaks." },
+    { "id": "g2", "image": "/HemspirePoems/assets/gallery/friendship poem.jpg", "text": "The Endless Journey of Friendship." },
+    { "id": "g3", "image": "/HemspirePoems/assets/gallery/kanjan Poem.jpg", "text": "Behind the Name Miser: A Silent Struggle." },
+    { "id": "g4", "image": "/HemspirePoems/assets/gallery/Money Poem.jpg", "text": "The Power and Perils of Money" },
+    { "id": "g5", "image": "/HemspirePoems/assets/gallery/Mother poem.jpg", "text": "Mother-The magic that created me." },
+    { "id": "g6", "image": "/HemspirePoems/assets/gallery/Past poem.jpg", "text": "From Worry to Victory." },
+    { "id": "g7", "image": "/HemspirePoems/assets/gallery/Silence poem.jpg", "text": "The Essence of Peace" },
+    { "id": "g8", "image": "/HemspirePoems/assets/gallery/Tears poem.jpg", "text": "Tears Speak Too – A Poem on Hidden Emotions." },
+    { "id": "g9", "image": "/HemspirePoems/assets/gallery/Memories poem.jpg", "text": "Echoes of Memories." },
+    { "id": "g10", "image": "/HemspirePoems/assets/gallery/Brother poem.jpg", "text": "A Brother by Bond, Not by Blood | Soulful Own Poem." },
+    { "id": "g11", "image": "/HemspirePoems/assets/gallery/smile poem.jpg", "text": "The Untold Truth Behind a Smile." },
+    { "id": "g12", "image": "/HemspirePoems/assets/gallery/Dream poem.jpg", "text": "Chasing Dreams in Silence." },
+    { "id": "g13", "image": "/HemspirePoems/assets/gallery/patience poem.jpg", "text": "Porumai - A Poem on Patience." },
+    { "id": "g14", "image": "/HemspirePoems/assets/gallery/Transgender poem.jpg", "text": "The Gift of God – A Tribute to Transgender People." },
+    { "id": "g15", "image": "/HemspirePoems/assets/gallery/Sister poem.jpg", "text": "Sister – A Precious Bond of Blood and Love." },
+    { "id": "g16", "image": "/HemspirePoems/assets/gallery/Alone poem.jpg", "text": "A reflection of silent talks with myself in solitude." },
+    { "id": "g17", "image": "/HemspirePoems/assets/gallery/Success poem.jpg", "text": "Success story for motivation." },
+    { "id": "g18", "image": "/HemspirePoems/assets/gallery/Missing poem.jpg", "text": "Echoes of Memories." },
+    { "id": "g19", "image": "/HemspirePoems/assets/gallery/Time-poem.jpg", "text": "An Angel We Lost, A Memory We Keep." }
+  ]
+}

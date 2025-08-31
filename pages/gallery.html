@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gallery - Hemspire Poems</title>
+  <link rel="stylesheet" href="../style.css"/>
+  <link rel="preload" href="../poems.json" as="fetch" crossorigin="anonymous">
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="logo-title">
+      <img src="../assets/images/logo.png" alt="Hemspire Logo" class="logo"/>
+      <h1 class="brand-title">🌸Galler Hemspire </h1>
+    </div>
+    <nav class="nav-links">
+      <a href="../index.html">Home</a>
+      <a href="gallery.html" class="active">Gallery</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+      <button id="themeToggle" class="btn-pill">🌙 Dark Mode</button>
+    </nav>
+     <div class="hamburger" id="hamburger">
+  ☰
+</div>
+  </header>
+
+  <!-- Search Bar -->
+  <section class="search-bar section-py">
+    <input type="text" id="gallerySearch" placeholder="Search all poems..." onkeyup="searchGalleryPoems()" aria-label="Search gallery poems">
+  </section>
+
+  <!-- Gallery -->
+  <section class="gallery section-py">
+    <div class="section-header">
+      <h2 class="reveal">All Poems</h2>
+    </div>
+    <div class="poem-grid reveal" id="poemGrid"></div>
+  </section>
+
+  <!-- Popup Modal -->
+  <div id="popup" class="popup hidden" role="dialog" aria-modal="true" aria-labelledby="popupText">
+    <div class="popup-content">
+      <span class="close-btn" role="button" tabindex="0" onclick="closePopup()" onkeypress="if(event.key==='Enter'){closePopup()}">&times;</span>
+      <img id="popupImage" src="" alt="Poem"/>
+      <p id="popupText"></p>
+      <div class="popup-actions">
+        <button class="btn" id="popupShareBtn">📤 Share</button>
+        <a class="btn" id="popupDownloadBtn" download="poem.jpg">⬇️ Download</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Hemspire. All rights reserved.</p>
+  </footer>
+
+  <script src="../script.js" defer></script>
+</body>
+</html>
