@@ -4,15 +4,15 @@ const path = require("path");
 const cors = require("cors");
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ✅ Serve static files (HTML, CSS, JS, images)
-app.use(express.static(path.join(__dirname)));
+// ✅ Serve static files (HTML, CSS, JS, images) from project root
+app.use(express.static(path.join(__dirname, "..")));
 
 // Save message API
 app.post("/contact", (req, res) => {
@@ -22,7 +22,11 @@ app.post("/contact", (req, res) => {
   let messages = [];
 
   if (fs.existsSync(filePath)) {
-    messages = JSON.parse(fs.readFileSync(filePath));
+    try {
+      messages = JSON.parse(fs.readFileSync(filePath));
+    } catch (err) {
+      console.error("Error reading messages.json:", err);
+    }
   }
 
   messages.push({ name, email, msg, time: new Date().toLocaleString() });
@@ -32,9 +36,9 @@ app.post("/contact", (req, res) => {
   res.json({ success: true, message: "Message saved in messages.json!" });
 });
 
-// Optional: default route for homepage
+// ✅ Default route for homepage
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "index.html"));
+  res.sendFile(path.join(__dirname, "..", "index.html"));
 });
 
 // Start server
