@@ -1,8 +1,8 @@
-// server.js
 const express = require("express");
 const fs = require("fs");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const path = require("path");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -10,12 +10,15 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(bodyParser.json());
 
-// Endpoint to handle contact form
+// ✅ Serve all static files (HTML, CSS, JS, images) from project root
+app.use(express.static(path.join(__dirname, "..")));
+
+// Endpoint to handle contact form submissions
 app.post("/api/contact", (req, res) => {
   const newMessage = req.body;
 
   // Read existing messages
-  fs.readFile("messages.json", "utf8", (err, data) => {
+  fs.readFile(path.join(__dirname, "messages.json"), "utf8", (err, data) => {
     let messages = [];
     if (!err && data) {
       try {
@@ -29,7 +32,7 @@ app.post("/api/contact", (req, res) => {
     messages.push(newMessage);
 
     // Save back to file
-    fs.writeFile("messages.json", JSON.stringify(messages, null, 2), (err) => {
+    fs.writeFile(path.join(__dirname, "messages.json"), JSON.stringify(messages, null, 2), (err) => {
       if (err) {
         return res.status(500).json({ error: "Failed to save message" });
       }
@@ -38,9 +41,9 @@ app.post("/api/contact", (req, res) => {
   });
 });
 
-// Health check route
-app.get("/", (req, res) => {
-  res.send("Contact API is running...");
+// ✅ Fallback: serve index.html if no API route matches
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "index.html"));
 });
 
 app.listen(PORT, () => {
