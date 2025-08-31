@@ -1,51 +1,47 @@
 const express = require("express");
 const fs = require("fs");
-const cors = require("cors");
-const bodyParser = require("body-parser");
 const path = require("path");
+const cors = require("cors");
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
+// Middleware
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// ✅ Serve all static files (HTML, CSS, JS, images) from project root
+// ✅ Serve static files (HTML, CSS, JS, images) from project root
 app.use(express.static(path.join(__dirname, "..")));
 
-// Endpoint to handle contact form submissions
-app.post("/api/contact", (req, res) => {
-  const newMessage = req.body;
+// Save message API
+app.post("/contact", (req, res) => {
+  const { name, email, msg } = req.body;
 
-  // Read existing messages
-  fs.readFile(path.join(__dirname, "messages.json"), "utf8", (err, data) => {
-    let messages = [];
-    if (!err && data) {
-      try {
-        messages = JSON.parse(data);
-      } catch (e) {
-        messages = [];
-      }
+  const filePath = path.join(__dirname, "messages.json");
+  let messages = [];
+
+  if (fs.existsSync(filePath)) {
+    try {
+      messages = JSON.parse(fs.readFileSync(filePath));
+    } catch (err) {
+      console.error("Error reading messages.json:", err);
     }
+  }
 
-    // Add new message
-    messages.push(newMessage);
+  messages.push({ name, email, msg, time: new Date().toLocaleString() });
 
-    // Save back to file
-    fs.writeFile(path.join(__dirname, "messages.json"), JSON.stringify(messages, null, 2), (err) => {
-      if (err) {
-        return res.status(500).json({ error: "Failed to save message" });
-      }
-      res.json({ success: true, message: "Message saved successfully" });
-    });
-  });
+  fs.writeFileSync(filePath, JSON.stringify(messages, null, 2));
+
+  res.json({ success: true, message: "Message saved in messages.json!" });
 });
 
-// ✅ Fallback: serve index.html if no API route matches
-app.get("*", (req, res) => {
+// ✅ Default route for homepage
+app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "index.html"));
 });
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+// Start server
+app.listen(PORT, () =>
+  console.log(`✅ Server running at http://localhost:${PORT}`)
+);
