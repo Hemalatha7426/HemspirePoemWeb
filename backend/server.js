@@ -1,47 +1,48 @@
+// server.js
 const express = require("express");
 const fs = require("fs");
-const path = require("path");
 const cors = require("cors");
+const bodyParser = require("body-parser");
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
-// Middleware
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-// ✅ Serve static files (HTML, CSS, JS, images) from project root
-app.use(express.static(path.join(__dirname, "..")));
+// Endpoint to handle contact form
+app.post("/api/contact", (req, res) => {
+  const newMessage = req.body;
 
-// Save message API
-app.post("/contact", (req, res) => {
-  const { name, email, msg } = req.body;
-
-  const filePath = path.join(__dirname, "messages.json");
-  let messages = [];
-
-  if (fs.existsSync(filePath)) {
-    try {
-      messages = JSON.parse(fs.readFileSync(filePath));
-    } catch (err) {
-      console.error("Error reading messages.json:", err);
+  // Read existing messages
+  fs.readFile("messages.json", "utf8", (err, data) => {
+    let messages = [];
+    if (!err && data) {
+      try {
+        messages = JSON.parse(data);
+      } catch (e) {
+        messages = [];
+      }
     }
-  }
 
-  messages.push({ name, email, msg, time: new Date().toLocaleString() });
+    // Add new message
+    messages.push(newMessage);
 
-  fs.writeFileSync(filePath, JSON.stringify(messages, null, 2));
-
-  res.json({ success: true, message: "Message saved in messages.json!" });
+    // Save back to file
+    fs.writeFile("messages.json", JSON.stringify(messages, null, 2), (err) => {
+      if (err) {
+        return res.status(500).json({ error: "Failed to save message" });
+      }
+      res.json({ success: true, message: "Message saved successfully" });
+    });
+  });
 });
 
-// ✅ Default route for homepage
+// Health check route
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "..", "index.html"));
+  res.send("Contact API is running...");
 });
 
-// Start server
-app.listen(PORT, () =>
-  console.log(`✅ Server running at http://localhost:${PORT}`)
-);
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});

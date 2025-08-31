@@ -329,7 +329,7 @@ function initContactForm() {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/contact", {
+      const response = await fetch("https://hemspirepoems.onrender.com/pages/contact.html", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, msg })
